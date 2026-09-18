@@ -1,0 +1,88 @@
+package testrig;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author lolivas2027
+ */
+public class TestRig {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        // Graphical Input Dialog
+        String inputStr = JOptionPane.showInputDialog(
+            null, 
+            "Enter change amount:", 
+            "Change Calculator", 
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        // Exit gracefully if the user clicks Cancel or closes the window
+        if (inputStr == null) {
+            return;
+        }
+
+        try {
+            double changeInput = Double.parseDouble(inputStr);
+
+            // Converts dollars to total cents
+            int cents = (int) (changeInput * 100 + 0.5);
+
+            // Calculates ten dollar bills and updates remaining balance ($10.00 = 1000 cents)
+            int tens = cents / 1000;
+            cents = cents % 1000;
+
+            // Calculates five dollar bills and updates remaining balance ($5.00 = 500 cents)
+            int fives = cents / 500;
+            cents = cents % 500;
+
+            // Calculates one dollar bills and updates remaining balance ($1.00 = 100 cents)
+            int ones = cents / 100;
+            cents = cents % 100;
+
+            // Calculates quarters and updates remaining balance ($0.25 = 25 cents)
+            int quarters = cents / 25;
+            cents = cents % 25;
+
+            // Calculates dimes and updates remaining balance ($0.10 = 10 cents)
+            int dimes = cents / 10;
+            cents = cents % 10;
+
+            // Calculates nickels and updates remaining balance ($0.05 = 5 cents)
+            int nickels = cents / 5;
+            cents = cents % 5;
+
+            // Remaining amount represents Pennies ($0.01 = 1 cent)
+            int pennies = cents;
+
+            // Formats output text for the dialog box
+            String result = tens + " Ten Dollar Bills\n"
+                          + fives + " Five Dollar Bill\n"
+                          + ones + " One Dollar Bills\n"
+                          + quarters + " Quarters\n"
+                          + dimes + " Dimes\n"
+                          + nickels + " Nickles\n"
+                          + pennies + " Pennies";
+
+            // Graphical Message Box
+            JOptionPane.showMessageDialog(
+                null, 
+                result, 
+                "Change Breakdown", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Invalid entry. Please enter a valid numerical dollar amount.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+}
