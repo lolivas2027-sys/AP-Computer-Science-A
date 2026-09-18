@@ -1,0 +1,44 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package stringobjects;
+
+/**
+ *
+ * @author lolivas2027
+ */
+public class StringObjects {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+       
+    // 1. Create a String object with first and last name
+    String name = "Larisa Olivas";
+
+    // 2. Print 'My name is "Larisa Olivas"'
+    System.out.println("My name is \"" + name + "\"");
+
+    // 3. Print "My name length is 13"
+    System.out.println("My name length is " + name.length());
+
+    // 4. Print 'My name in upper case is "LARISA OLIVAS"'
+    System.out.println("My name in upper case is \"" + name.toUpperCase() + "\"");
+
+    // 5. Print 'My name in lower case is "larisa olivas"'
+    System.out.println("My name in lower case is \"" + name.toLowerCase() + "\"");
+
+    // 6. Print 'The first letter in my name is "L"'
+    System.out.println("The first letter in my name is \"" + name.charAt(0) + "\"");
+
+    // 7. Print 'The last letter in my name is "s"'
+    System.out.println("The last letter in my name is \"" + name.charAt(name.length() - 1) + "\"");
+
+    // 8. Print "The index of the space between the names is 6"
+    System.out.println("The index of the space between the names is " + name.indexOf(" "));
+}
+    }
+    
