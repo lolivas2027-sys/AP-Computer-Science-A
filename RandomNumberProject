@@ -1,0 +1,50 @@
+package randomnumberprogrammingproject;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class RandomNumberProgrammingProject {
+
+    // part1
+    public static String generatePhoneNumber() {
+        Random random = new Random();
+        String firstPart = "";
+        for (int i = 0; i < 3; i++) {
+            firstPart += random.nextInt(8); 
+        }
+        int middleNum = random.nextInt(656); 
+        String middlePart = String.format("%03d", middleNum); 
+        int lastNum = random.nextInt(10000); 
+        String lastPart = String.format("%04d", lastNum); 
+
+        return firstPart + "-" + middlePart + "-" + lastPart;
+    }
+
+    // roll dice
+    public static int rollDie() {
+        Random random = new Random();
+        return random.nextInt(6) + 1; // Generates 1 to 6
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Press 'p' to generate a phone number, 'r' to roll a die, or any other key to exit.");
+
+        while (true) {
+            System.out.print("Command: ");
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equals("p")) {
+                System.out.println("Phone Number: " + generatePhoneNumber() + "\n");
+            } else if (input.equals("r")) {
+                System.out.println("Die Roll: " + rollDie() + "\n");
+            } else {
+                System.out.println("Exiting program.");
+                break;
+            }
+        }
+
+        scanner.close();
+    }
+}
