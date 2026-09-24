@@ -1,0 +1,99 @@
+package mathclass;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class MathClass {
+
+    // Helper method to round a double value to a specified number of decimal places
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
+
+    public static void main(String[] args) {
+        Random rand = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        // --- SECTION 1: Trigonometric Functions ---
+        // Random integer from 0 to 90 inclusive
+        int angleDegree = rand.nextInt(91); 
+        double radians = Math.toRadians(angleDegree);
+
+        double sine = roundAvoid(Math.sin(radians), 3);
+        double cosine = roundAvoid(Math.cos(radians), 3);
+        double tangent = roundAvoid(Math.tan(radians), 3);
+
+        System.out.println("=== Section 1: Trigonometry ===");
+        System.out.printf("Number: %d Sine: %.3f Cosine: %.3f Tangent: %.3f%n%n", 
+                          angleDegree, sine, cosine, tangent);
+
+
+        // --- SECTION 2: Circle Area & Sphere Volume ---
+        // Random real number from 1.0 to 20.0
+        double radius = 1.0 + (20.0 - 1.0) * rand.nextDouble();
+        
+        double circleArea = roundAvoid(Math.PI * Math.pow(radius, 2), 3);
+        double sphereVolume = roundAvoid((4.0 / 3.0) * Math.PI * Math.pow(radius, 3), 3);
+
+        System.out.println("=== Section 2: Geometry ===");
+        System.out.println("Generated Radius: " + roundAvoid(radius, 3));
+        System.out.println("Circle Area: " + circleArea);
+        System.out.println("Sphere Volume: " + sphereVolume);
+        System.out.println();
+
+
+        // --- SECTION 3: Large Number Logarithms & Square Root ---
+        // Random real number in range 100,000,000.0 to 100,000,000,000.0
+        double minLarge = 100_000_000.0;
+        double maxLarge = 100_000_000_000.0;
+        double largeNumber = minLarge + (maxLarge - minLarge) * rand.nextDouble();
+
+        double sqrtVal = roundAvoid(Math.sqrt(largeNumber), 5);
+        double naturalLog = roundAvoid(Math.log(largeNumber), 5);
+        double log10Val = roundAvoid(Math.log10(largeNumber), 5);
+
+        System.out.println("=== Section 3: Logarithms & Square Root ===");
+        System.out.println("Large Number: " + largeNumber);
+        System.out.println("Square Root: " + sqrtVal);
+        System.out.println("Natural Log (ln): " + naturalLog);
+        System.out.println("Log10: " + log10Val);
+        System.out.println();
+
+
+        // --- SECTION 4: Mass-Energy Equivalence (E = mc^2) ---
+        // Speed of light in meters per second (m/s)
+        final double C = 299_792_458.0; 
+        
+        // E = mc^2 => m (kg) = E / c^2. 
+        // Convert kg to grams by multiplying by 1000: m (g) = (E / c^2) * 1000
+        double energyJoules = largeNumber;
+        double massInGrams = (energyJoules / Math.pow(C, 2)) * 1000.0;
+
+        System.out.print("Enter number of decimal places to round mass in grams: ");
+        int massDecimals = scanner.nextInt();
+        
+        double roundedMass = roundAvoid(massInGrams, massDecimals);
+        System.out.println("Mass required (in grams) for " + energyJoules + " Joules: " + roundedMass);
+        System.out.println();
+
+
+        // --- SECTION 5: Power Calculation via User Input ---
+        System.out.print("Enter a real number base: ");
+        double base = scanner.nextDouble();
+
+        System.out.print("Enter an integer exponent: ");
+        int exponent = scanner.nextInt();
+
+        System.out.print("Enter number of decimal places for the result: ");
+        int powerDecimals = scanner.nextInt();
+
+        double powerResult = Math.pow(base, exponent);
+        double roundedPower = roundAvoid(powerResult, powerDecimals);
+
+        System.out.println("\n=== Section 5: Power Output ===");
+        System.out.println(base + " raised to the power of " + exponent + " = " + roundedPower);
+
+        scanner.close();
+    }
+}
