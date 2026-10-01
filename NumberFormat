@@ -1,0 +1,89 @@
+package numberformat;
+
+import java.util.Scanner;
+import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
+import java.math.BigDecimal;
+
+public class NumberFormat {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Task 1: School Demographics Percentage
+        System.out.println("--- Task 1: School Demographics ---");
+        System.out.print("Enter the total number of students at the school: ");
+        int totalStudents = scanner.nextInt();
+
+        System.out.print("Enter the number of girls at the school: ");
+        int totalGirls = scanner.nextInt();
+
+        if (totalStudents > 0 && totalGirls >= 0 && totalGirls <= totalStudents) {
+            int totalBoys = totalStudents - totalGirls;
+            double pctGirls = ((double) totalGirls / totalStudents) * 100;
+            double pctBoys = ((double) totalBoys / totalStudents) * 100;
+
+            System.out.printf("Percentage of Girls: %.2f%%\n", pctGirls);
+            System.out.printf("Percentage of Boys: %.2f%%\n", pctBoys);
+        } else {
+            System.out.println("Error: Total students must be > 0 and girls must be between 0 and total students.");
+        }
+
+        System.out.println("\n" + "=".repeat(50) + "\n");
+
+        // Task 2: Currency Conversion 
+
+        System.out.println("--- Task 2: Currency Conversion ---");
+        System.out.print("Enter the total amount of money in Dollars and Cents (e.g., 250.75): ");
+        double usdAmount = scanner.nextDouble();
+
+        double gbpRate = 0.75;
+        double eurRate = 0.86;
+
+        double gbpAmount = usdAmount * gbpRate;
+        double eurAmount = usdAmount * eurRate;
+
+     
+        java.text.NumberFormat ukFormat = java.text.NumberFormat.getCurrencyInstance(Locale.UK);
+        java.text.NumberFormat eurFormat = java.text.NumberFormat.getCurrencyInstance(Locale.GERMANY);
+
+        System.out.println("Exchange Rate (USD to GBP): £" + gbpRate + " per $1");
+        System.out.println("Converted to British Pounds: " + ukFormat.format(gbpAmount));
+
+        System.out.println("Exchange Rate (USD to EUR): €" + eurRate + " per $1");
+        System.out.println("Converted to Euros: " + eurFormat.format(eurAmount));
+
+        System.out.println("\n" + "=".repeat(50) + "\n");
+
+        // Task 3: Pi Decimal Place Formatting
+     
+        System.out.println("--- Task 3: Formatting Pi ---");
+        System.out.print("Enter an integer from 0 to 15 for decimal places: ");
+        int decimalPlaces = scanner.nextInt();
+
+        if (decimalPlaces >= 0 && decimalPlaces <= 15) {
+            String formatString = "%." + decimalPlaces + "f%n";
+            System.out.print("Pi formatted to " + decimalPlaces + " decimal place(s): ");
+            System.out.printf(formatString, Math.PI);
+        } else {
+            System.out.println("Invalid input! Please enter an integer between 0 and 15.");
+        }
+
+        System.out.println("\n" + "=".repeat(50) + "\n");
+
+       // Task 4: Large Random Decimal Number
+       
+        System.out.println("--- Task 4: Large Random Decimal Number ---");
+        long minVal = 100_000_000L;
+        long maxVal = 999_000_000_000_000_000L;
+
+        long randomLargeNum = ThreadLocalRandom.current().nextLong(minVal, maxVal + 1);
+
+        BigDecimal bd = new BigDecimal(randomLargeNum);
+        java.text.NumberFormat numFormat = java.text.NumberFormat.getInstance(Locale.US);
+
+        System.out.println("Random large number: " + numFormat.format(bd));
+
+        scanner.close();
+    }
+}
