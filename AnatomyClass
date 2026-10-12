@@ -1,0 +1,91 @@
+package anatomyclass;
+
+public class AnatomyClass {
+
+    public static void main(String[] args) {
+        // Step 1: Base car test using default constructor
+        Car baseCar = new Car();
+        System.out.println(" Base Car ");
+        System.out.println(baseCar);
+        System.out.println();
+
+        // Step 2: Create required car models
+        Car vwBug = new Car("VW Bug", 57, 90.0, 18000.00);
+        Car prius = new Car("Toyota Prius", 121, 112.0, 28755.00);
+        Car bmwI8 = new Car("BMW i8", 369, 155.0, 147500.00);
+        Car teslaModel3 = new Car("Tesla Model 3", 450, 162.0, 42000.00);
+
+        // Print details
+        System.out.println("Car Fleet Details");
+        System.out.println(vwBug);
+        System.out.println(prius);
+        System.out.println(bmwI8);
+        System.out.println(teslaModel3);
+    }
+}
+
+// Car class defined OUTSIDE of the main method/AnatomyClass
+class Car {
+    // Member variables
+    private String carBrand;
+    private int enginePower; // in Horse Power (HP)
+    private double maxSpeed;  // in MPH
+    private double price;     // in $
+
+    // Default Constructor (Base Car)
+    public Car() {
+        this.carBrand = "Base Model";
+        this.enginePower = 100;
+        this.maxSpeed = 100.0;
+        this.price = 15000.0;
+    }
+
+    // Parameterized Constructor
+    public Car(String carBrand, int enginePower, double maxSpeed, double price) {
+        this.carBrand = carBrand;
+        this.enginePower = enginePower;
+        this.maxSpeed = maxSpeed;
+        this.price = price;
+    }
+
+    // Getters
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public int getEnginePower() {
+        return enginePower;
+    }
+
+    public double getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    // Setters
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public void setMaxSpeed(double maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    // toString Method
+    @Override
+    public String toString() {
+        return String.format("Brand: %-15s | Power: %3d HP | Max Speed: %5.1f MPH | Price: $%,.2f",
+                carBrand, enginePower, maxSpeed, price);
+    }
+}
