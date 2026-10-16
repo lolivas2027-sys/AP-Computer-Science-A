@@ -1,0 +1,78 @@
+package interestratecalculator;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Scanner;
+
+/**
+ * Class containing both the main driver method and the black-box calculation logic.
+ */
+public class InterestRateCalculator {
+
+    // Public constant for interest rate (3.5% = 0.035)
+    public static final double RATE = 0.035;
+
+    /**
+     * Main method - application entry point.
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt user for financial inputs
+        System.out.print("Enter the financial amount (e.g., 1000000): ");
+        double amount = scanner.nextDouble();
+
+        System.out.print("Enter the number of months for repayment: ");
+        int months = scanner.nextInt();
+
+        // Instantiate the calculator object (black box)
+        InterestRateCalculator calculator = new InterestRateCalculator();
+
+        // Calculate payment metrics
+        double monthlyPayment = calculator.calculateMonthlyPayment(amount, months);
+        double totalRepaid = monthlyPayment * months;
+
+        // Setup formatters for currency and percentage
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+        NumberFormat percentFormat = NumberFormat.getPercentInstance(Locale.US);
+        percentFormat.setMaximumFractionDigits(2);
+
+        // Output results
+        System.out.println("\n--- Loan Repayment Summary ---");
+        System.out.println("Principal Amount: " + currencyFormat.format(amount));
+        System.out.println("Interest Rate: " + percentFormat.format(RATE));
+        System.out.println("Repayment Period: " + months + " months");
+        System.out.println("Monthly Payment: " + currencyFormat.format(monthlyPayment));
+        System.out.println("Total Amount Repaid: " + currencyFormat.format(totalRepaid));
+
+        scanner.close();
+    }
+
+    /**
+     * Public method to compute the total monthly payment.
+     */
+    public double calculateMonthlyPayment(double amount, int months) {
+        if (months <= 0) {
+            throw new IllegalArgumentException("Number of months must be greater than zero.");
+        }
+
+        double baseMonthlyPrincipal = calculateBaseMonthlyAmount(amount, months);
+        double monthlyInterest = calculateMonthlyInterest(amount);
+
+        return baseMonthlyPrincipal + monthlyInterest;
+    }
+
+    /**
+     * Private helper method to divide principal across months.
+     */
+    private double calculateBaseMonthlyAmount(double amount, int months) {
+        return amount / months;
+    }
+
+    /**
+     * Private helper method to calculate monthly interest.
+     */
+    private double calculateMonthlyInterest(double amount) {
+        return (amount * RATE) / 12.0;
+    }
+}
