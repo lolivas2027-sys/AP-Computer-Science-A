@@ -1,0 +1,68 @@
+package constructorsassignment;
+
+/**
+ *
+ * @author lolivas2027
+ */
+public class ConstructorsAssignment {
+
+    public static void main(String[] args) {
+        Course course1 = new Course("Computer Science", "AP CS A", 500, "Mr.Nelson");
+
+        Course course2 = new Course("Calculus");
+        course2.setCode("AP CALC BC");
+        course2.setPointsTotal(450);
+        course2.setInstructorName("Mr. Dahms");
+
+        System.out.println("Updating " + course2.getTitle() + " (Code: " + course2.getCode() + ") complete.\n");
+
+        Course course3 = new Course("Physics", "PHYS 101", 300, "Ms.Rafie");
+        course3.setInstructorName("Ms.Rafie");
+        course3.setPointsTotal(400);
+
+        System.out.println(" COURSE LIST ");
+        System.out.println(course1);
+        System.out.println(course2);
+        System.out.println(course3);
+    }
+}
+
+// Course class defined 
+class Course {
+    private String title;
+    private String code;
+    private int pointsTotal;
+    private String instructorName;
+
+    public Course(String title, String code, int pointsTotal, String instructorName) {
+        this.title = title;
+        this.code = code;
+        this.pointsTotal = pointsTotal;
+        this.instructorName = instructorName;
+    }
+
+    public Course(String title) {
+        this.title = title;
+        this.code = "TBD";
+        this.pointsTotal = 0;
+        this.instructorName = "TBD";
+    }
+
+    public String getTitle() { return title; }
+    public String getCode() { return code; }
+    public int getPointsTotal() { return pointsTotal; }
+    public String getInstructorName() { return instructorName; }
+
+    public void setTitle(String title) { this.title = title; }
+    public void setCode(String code) { this.code = code; }
+    public void setPointsTotal(int pointsTotal) { this.pointsTotal = pointsTotal; }
+    public void setInstructorName(String instructorName) { this.instructorName = instructorName; }
+
+    @Override
+    public String toString() {
+        return "Course Title: " + title + "\n" +
+               "Course Code:  " + code + "\n" +
+               "Total Points: " + pointsTotal + "\n" +
+               "Instructor:   " + instructorName + "\n";
+    }
+}
