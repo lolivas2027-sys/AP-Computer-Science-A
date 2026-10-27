@@ -1,0 +1,124 @@
+import java.util.Scanner;
+
+public class MyStore {
+
+    public static void main(String[] args) {
+
+        final double MAX_BUDGET = 250.00;
+
+        // Initialize items
+        Item shirt = new Item("T Shirt", 29.99);
+        Item shoes = new Item("Shoes", 125.99);
+        Item jeans = new Item("Jeans", 60.99);
+        Item jacket = new Item("Jacket", 250.00);
+        Item hat = new Item("Hat", 25.99);
+        Item shorts = new Item("Shorts", 75.99);
+        Item blouse = new Item("Blouse", 88.99);
+
+        Scanner scanner = new Scanner(System.in);
+
+        double totalSpent = 0.0;
+        int itemCount = 0;
+
+        System.out.println("Welcome to MyStore");
+        System.out.println("Available items: T Shirt, Shoes, Jeans, Jacket, Hat, Shorts, Blouse");
+        System.out.println("Type 'exit' to quit.");
+
+        while (true) {
+
+            System.out.print("Enter item name: ");
+            String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            // Find matching item
+            Item selectedItem = null;
+
+            if (input.equalsIgnoreCase("T Shirt")) {
+                selectedItem = shirt;
+
+            } else if (input.equalsIgnoreCase("Shoes")) {
+                selectedItem = shoes;
+
+            } else if (input.equalsIgnoreCase("Jeans")) {
+                selectedItem = jeans;
+
+            } else if (input.equalsIgnoreCase("Jacket")) {
+                selectedItem = jacket;
+
+            } else if (input.equalsIgnoreCase("Hat")) {
+                selectedItem = hat;
+
+            } else if (input.equalsIgnoreCase("Shorts")) {
+                selectedItem = shorts;
+
+            } else if (input.equalsIgnoreCase("Blouse")) {
+                selectedItem = blouse;
+            }
+
+            // Handle output
+            if (selectedItem == null) {
+
+                System.out.println("ERROR: Item not found. Please try again.");
+
+            } else {
+
+                double price = selectedItem.getPrice();
+
+                // budget check
+                if (totalSpent + price > MAX_BUDGET) {
+
+                    System.out.println("WARNING: Adding "
+                            + selectedItem.getName()
+                            + " would exceed your budget!");
+
+                } else {
+
+                    totalSpent += price;
+                    itemCount++;
+
+                    System.out.println("Added: "
+                            + selectedItem.getName());
+
+                    System.out.printf("Price: $%.2f%n", price);
+
+                    System.out.printf("Total spent: $%.2f%n", totalSpent);
+
+                    System.out.printf("Remaining budget: $%.2f%n",
+                            MAX_BUDGET - totalSpent);
+                }
+            }
+        }
+
+        // Final results
+        System.out.println("Shopping Summary");
+        System.out.println("Items purchased: " + itemCount);
+        System.out.printf("Final total: $%.2f%n", totalSpent);
+        System.out.printf("Remaining budget: $%.2f%n",
+                MAX_BUDGET - totalSpent);
+
+        scanner.close();
+    }
+}
+
+// Item class
+class Item {
+
+    private String name;
+    private double price;
+
+    public Item(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
